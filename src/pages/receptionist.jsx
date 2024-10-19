@@ -29,6 +29,7 @@ const ReceptionistPage = () => {
 
   const handleEdit = (patient) => {
     setCurrentPatient(patient);
+    setDialogBox(true);
     setIsEditing(true);
   };
 
@@ -42,7 +43,7 @@ const ReceptionistPage = () => {
 
   return (
     <div className="receptionist-page">
-      <header>
+      <header className="receptionist-header">
         <h1>ABC Hospital - Receptionist Dashboard</h1>
       </header>
       <button className="add-patient-button" onClick={handleDialogBox}>
@@ -53,16 +54,14 @@ const ReceptionistPage = () => {
       <ReactDialogBox
               closeBox={handleDialogBox}
               modalWidth='50%'
-              headerBackgroundColor='black'
-              headerTextColor='white'
-              headerHeight='65'
-              closeButtonColor='white'
-              bodyBackgroundColor='white'
+              headerHeight='0'
+              bodyBackgroundColor=''
               bodyTextColor='black'
               bodyHeight='65vh'
-              headerText='New patient'>
+              headerText=''>
         <section className="patient-form">
           <h2>{isEditing ? 'Edit Patient' : 'Add New Patient'}</h2>
+          <button className="close-dialog-button" onClick={handleDialogBox}>Close</button>
           <form onSubmit={handleSubmit}>
             <div className="form-group">
               <label htmlFor="name">Name:</label>
