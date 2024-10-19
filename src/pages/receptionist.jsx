@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import "../styles/master.css";
+import "../styles/receptionist.css";
 
 const ReceptionistPage = () => {
   const [patients, setPatients] = useState([]);
@@ -119,83 +121,6 @@ const ReceptionistPage = () => {
           </table>
         </section>
       </main>
-      <style jsx>{`
-        .receptionist-page {
-          font-family: Arial, sans-serif;
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 20px;
-        }
-        header {
-          background-color: #2563eb;
-          color: white;
-          padding: 20px;
-          border-radius: 8px;
-          margin-bottom: 20px;
-        }
-        h1 {
-          margin: 0;
-        }
-        main {
-          display: flex;
-          gap: 20px;
-        }
-        .patient-form, .patient-list {
-          flex: 1;
-          background-color: #f3f4f6;
-          padding: 20px;
-          border-radius: 8px;
-        }
-        h2 {
-          margin-top: 0;
-          color: #2563eb;
-        }
-        .form-group {
-          margin-bottom: 15px;
-        }
-        label {
-          display: block;
-          margin-bottom: 5px;
-        }
-        input, select {
-          width: 100%;
-          padding: 8px;
-          border: 1px solid #d1d5db;
-          border-radius: 4px;
-        }
-        button {
-          background-color: #2563eb;
-          color: white;
-          border: none;
-          padding: 10px 15px;
-          border-radius: 4px;
-          cursor: pointer;
-          transition: background-color 0.3s;
-        }
-        button:hover {
-          background-color: #1d4ed8;
-        }
-        table {
-          width: 100%;
-          border-collapse: collapse;
-        }
-        th, td {
-          border: 1px solid #d1d5db;
-          padding: 10px;
-          text-align: left;
-        }
-        th {
-          background-color: #e5e7eb;
-        }
-        .patient-list button {
-          margin-right: 5px;
-        }
-        @media (max-width: 768px) {
-          main {
-            flex-direction: column;
-          }
-        }
-      `}</style>
     </div>
   );
 };

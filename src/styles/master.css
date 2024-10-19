@@ -1,0 +1,10 @@
+:root {
+    --color1: rgb(76, 139, 177);
+    --color1_dim: rgba(28, 30, 67, 0.25);
+    --color2: white;
+    --gradient1: linear-gradient(to top left, rgba(47, 47, 119, .5), rgb(186, 26, 53, .5));
+  }
+  
+* {
+    font-family: 'Segoe UI', sans-serif;
+}

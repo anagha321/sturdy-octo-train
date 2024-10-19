@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from "react-router-dom";
+import "./styles/master.css"
 import "./App.css";
 
 const Landing = () => {
@@ -23,7 +25,8 @@ const Landing = () => {
           <h1 className='heading'>ABC Hospital Management System</h1>
         </div>
         <button className="login-button" onClick={handleLogin}>
-          Log In
+          <Link to="/reception">Log In</Link>
+          {/* Log In */}
         </button>
       </div>
     </div>

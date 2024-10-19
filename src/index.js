@@ -1,13 +1,37 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import {BrowserRouter,Routes,Route} from 'react-router-dom';
 import './index.css';
 import App from './App';
+// import Landing from './pages/landing';
+import ReceptionistPage from "./pages/receptionist";
 import reportWebVitals from './reportWebVitals';
+
+export default function Router() {
+  // return (
+  //   <BrowserRouter>
+  //     <Routes>
+  //       <Route index element=<App></App>></Route>
+  //       <Route path="/reception" element=<ReceptionistPage/>></Route>
+  //     </Routes>
+  //   </BrowserRouter>
+  // )
+}
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />}>
+          {/* <Route index element={<App />} /> */}
+          {/* <Route path="blogs" element={<Blogs />} />
+          <Route path="contact" element={<Contact />} />
+          <Route path="*" element={<NoPage />} /> */}
+        </Route>
+        <Route path="reception" element={<ReceptionistPage />} />
+      </Routes>
+    </BrowserRouter>
   </React.StrictMode>
 );
 
