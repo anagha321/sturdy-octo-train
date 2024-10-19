@@ -1,3 +1,9 @@
+:root {
+  --color1: rgb(76, 139, 177);
+  --color1_dim: rgba(28, 30, 67, 0.25);
+  --color2: white;
+}
+
 .App {
   text-align: center;
 }
@@ -34,5 +40,70 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+.heart-pulse-icon {
+  max-height: 100px;
+}
+
+.login-container {
+  padding: 5vh 5vw;
+  margin: 5vh 5vw;
+  min-height: 40vh;
+  max-height: 40vh;
+  min-width: 70vw;
+  max-width: 70vw;
+  border-radius: 5vh;
+  /* background: var(--color1_dim); */
+  background: linear-gradient(to top left, rgba(47, 47, 119, .5), rgb(186, 26, 53, .5));
+  color: var(--color2);
+  @media screen and (max-width: 781px) {
+    max-height: 50vh;
+    min-height: 50vh;
+    max-width: 80vw;
+    min-width: 80vw;
+  }
+}
+
+
+.login-page {
+  display: flex;
+  flex-direction: row;
+  @media screen and (max-width: 781px) {
+    flex-direction: column;
+  }
+}
+
+
+.login-button {
+  background-color: white;
+  color: magenta;
+  font-weight: 900;
+  opacity: 80%;
+  border: none;
+  border-radius: 1vw;
+  padding: 1vh 2vw;
+  transition: linear 1s ease;
+}
+
+.login-button:hover {
+  opacity: 100%;
+}
+.datetime-container {
+  /* background: linear-gradient(to top left, rgba(47, 47, 119, .5), rgb(186, 26, 53, .5)); */
+  background-color: var(--color1_dim);
+  font-weight: 600;
+  color: black;
+  width: 5vw;
+  height: 100vh;
+  /* position: absolute; */
+  /* top: 0;
+  left: 0; */
+  padding: 2vh 2vw;
+  @media screen and (max-width: 781px) {
+    flex-direction: column;
+    width: 96vw;
+    height: 10vh;
   }
 }
