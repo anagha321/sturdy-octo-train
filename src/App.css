@@ -79,9 +79,10 @@
   border-radius: 1vw;
   padding: 1vh 2vw;
   transition: linear 1s ease;
+  margin-top: 10vh;
 }
 
-.login-button:hover {
+.login-page .login-button:hover {
   opacity: 100%;
 }
 .datetime-container {

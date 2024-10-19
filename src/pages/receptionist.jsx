@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import "../styles/master.css";
 import "../styles/receptionist.css";
+import { ReactDialogBox } from 'react-js-dialog-box';
+import 'react-js-dialog-box/dist/index.css';
 
 const ReceptionistPage = () => {
   const [patients, setPatients] = useState([]);
   const [currentPatient, setCurrentPatient] = useState({ id: 0, name: '', age: '', gender: '', contact: '' });
   const [isEditing, setIsEditing] = useState(false);
+  const [isDialogBox, setDialogBox] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -21,11 +24,16 @@ const ReceptionistPage = () => {
     }
     setCurrentPatient({ id: 0, name: '', age: '', gender: '', contact: '' });
     setIsEditing(false);
+    setDialogBox(false);
   };
 
   const handleEdit = (patient) => {
     setCurrentPatient(patient);
     setIsEditing(true);
+  };
+
+  const handleDialogBox = () => {
+    setDialogBox(!isDialogBox);
   };
 
   const handleDelete = (id) => {
@@ -37,7 +45,22 @@ const ReceptionistPage = () => {
       <header>
         <h1>ABC Hospital - Receptionist Dashboard</h1>
       </header>
+      <button className="add-patient-button" onClick={handleDialogBox}>
+        +
+      </button>
       <main>
+        {isDialogBox &&
+      <ReactDialogBox
+              closeBox={handleDialogBox}
+              modalWidth='50%'
+              headerBackgroundColor='black'
+              headerTextColor='white'
+              headerHeight='65'
+              closeButtonColor='white'
+              bodyBackgroundColor='white'
+              bodyTextColor='black'
+              bodyHeight='65vh'
+              headerText='New patient'>
         <section className="patient-form">
           <h2>{isEditing ? 'Edit Patient' : 'Add New Patient'}</h2>
           <form onSubmit={handleSubmit}>
@@ -92,6 +115,7 @@ const ReceptionistPage = () => {
             <button type="submit">{isEditing ? 'Update Patient' : 'Add Patient'}</button>
           </form>
         </section>
+        </ReactDialogBox>}
         <section className="patient-list">
           <h2>Patient List</h2>
           <table>

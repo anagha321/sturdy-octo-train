@@ -90,3 +90,12 @@
       flex-direction: column;
     }
   }
+
+  .add-patient-button {
+    border-radius: 100%;
+    width: 10vh; height: 10vh;
+    text-align: center;
+    position: absolute;
+    bottom: 5vh;
+    right: 5vw;
+  }
