@@ -23,13 +23,8 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<App />}>
-          {/* <Route index element={<App />} /> */}
-          {/* <Route path="blogs" element={<Blogs />} />
-          <Route path="contact" element={<Contact />} />
-          <Route path="*" element={<NoPage />} /> */}
-        </Route>
-        <Route path="reception" element={<ReceptionistPage />} />
+        <Route path="/" element={<App />} />
+        <Route path="/reception" element={<ReceptionistPage />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

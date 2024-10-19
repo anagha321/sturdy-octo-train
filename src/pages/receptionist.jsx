@@ -3,28 +3,61 @@ import "../styles/master.css";
 import "../styles/receptionist.css";
 import { ReactDialogBox } from 'react-js-dialog-box';
 import 'react-js-dialog-box/dist/index.css';
+import db from "../firebase_config.jsx";
+import { collection, doc, setDoc, getDocs, getCountFromServer } from 'firebase/firestore';
 
 const ReceptionistPage = () => {
+  // const fireSQL = new FireSQL(db);
+  var docRef = collection(db, "patients");
+
   const [patients, setPatients] = useState([]);
   const [currentPatient, setCurrentPatient] = useState({ id: 0, name: '', age: '', gender: '', contact: '' });
   const [isEditing, setIsEditing] = useState(false);
   const [isDialogBox, setDialogBox] = useState(false);
+
+  const getPatientsFromDb = async () => {
+    var patients = [];
+    try {
+      const docs = await getDocs(docRef);
+      docs.forEach(function (doc) {
+        patients = [...patients, {
+          id: doc.id,
+          name: doc.data().patient_name,
+          age: Math.floor(Math.abs(doc.data().patient_dob.seconds*1000 - Date.now())/(1000*3600*24*365.25)).toString(),
+          gender: doc.data().patient_sex,
+          contact:'0000'}]; 
+      });
+      setPatients(patients);
+    } catch (e) {
+      console.log("Firestore error");
+    }
+  }
+
+  const modifyPatientInDb = async () => {
+    var docid = currentPatient.id;
+    if (!isEditing) { 
+      docid = (await getCountFromServer(docRef)).data().count + 1;
+    }
+    await setDoc(doc(db, "patients", ""+docid), {
+      patient_date_registration: Date.now(),
+      patient_name: currentPatient.name,
+      patient_dob: 'January 1, 2005 at 12:00:00 AM UTC+5:30',
+      patient_sex: currentPatient.gender[0].toLowerCase()
+    });
+  }
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setCurrentPatient(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (isEditing) {
-      setPatients(patients.map(p => p.id === currentPatient.id ? currentPatient : p));
-    } else {
-      setPatients([...patients, { ...currentPatient, id: Date.now() }]);
-    }
+    await modifyPatientInDb();
     setCurrentPatient({ id: 0, name: '', age: '', gender: '', contact: '' });
     setIsEditing(false);
     setDialogBox(false);
+    getPatientsFromDb();
   };
 
   const handleEdit = (patient) => {
@@ -35,12 +68,15 @@ const ReceptionistPage = () => {
 
   const handleDialogBox = () => {
     setDialogBox(!isDialogBox);
+    getPatientsFromDb();
   };
 
   const handleDelete = (id) => {
     setPatients(patients.filter(p => p.id !== id));
   };
 
+  getPatientsFromDb();
+  
   return (
     <div className="receptionist-page">
       <header className="receptionist-header">
