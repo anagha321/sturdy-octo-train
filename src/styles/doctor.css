@@ -1,0 +1,93 @@
+
+.doctor-dashboard {
+    font-family: Arial, sans-serif;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  header {
+  /*   background-color: #2563eb;
+    color: white; */
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    background: linear-gradient(to top left, rgba(47, 47, 119, .5), rgb(186, 26, 53, .5));
+  color:white;
+  }
+  h1 {
+    margin: 0;
+    font-size: 24px;
+    color:white
+  }
+  main {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 20px;
+  }
+  section {
+    background-color:rgb(252, 236, 243);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  h2 {
+    color: rgb(76, 139, 177);
+    margin-top: 0;
+  }
+  .patient-info p {
+    margin: 5px 0;
+  }
+  .form-group {
+    margin-bottom: 15px;
+  }
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-family: Arial, sans-serif;
+    font-size:20px;   
+  }
+  input, textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+  }
+  textarea {
+    height: 100px;
+    resize: vertical;
+  }
+  button {
+    background-color: rgb(76, 139, 177);
+    color: white;
+    border: none;
+    padding: 10px ;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top:10px;
+  }
+  button:hover {
+    background-color:linear-gradient(to top left, rgba(47, 47, 119, .5), rgb(186, 26, 53, .5));
+  }
+  .history-entry {
+    background-color: white;
+    padding: 15px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  .history-entry h3 {
+    margin: 0 0 10px 0;
+    color: #4b5563;
+  }
+  .observation-prescription {
+    grid-column: 1 / -1;
+  }
+  .patient-search {
+    grid-column: 1 / -1;
+  }
+  @media (max-width: 768px) {
+    main {
+      grid-template-columns: 1fr;
+    }
+  }

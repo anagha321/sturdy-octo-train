@@ -1,12 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import {BrowserRouter,Routes,Route} from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './index.css';
 import App from './App';
-// import Landing from './pages/landing';
 import ReceptionistPage from "./pages/receptionist";
 import reportWebVitals from './reportWebVitals';
-
+import DoctorDashboard from './pages/doctor';
 export default function Router() {
   // return (
   //   <BrowserRouter>
@@ -25,6 +24,7 @@ root.render(
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/reception" element={<ReceptionistPage />} />
+        <Route path="/doctor" element={<DoctorDashboard />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

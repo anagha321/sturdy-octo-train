@@ -1,9 +1,9 @@
 .receptionist-page {
-    /* font-family: Arial, sans-serif; */
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-  
+  /* font-family: Arial, sans-serif; */
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+
   header.receptionist-header {
     background: var(--gradient1);
     color: white;
@@ -12,63 +12,80 @@
     position: absolute;
     display: flex;
     align-items: center;
-    left:0; top:0;
+    left: 0;
+    top: 0;
     width: 96vw;
     height: 10vh;
+
     @media screen and (max-width: 781px) {
       font-size: 75%;
       justify-content: center;
     }
   }
+
   h1 {
     margin: 0;
   }
+
   main {
     display: flex;
     gap: 20px;
   }
-  .patient-form, .patient-list {
+
+  .patient-form,
+  .patient-list {
     flex: 1;
     background-color: white;
     padding: 20px;
     position: relative;
   }
+
   .patient-list {
     margin-top: 10vh;
   }
+
   header._br_-q {
     display: none;
   }
+
   .close-dialog-button {
     /* height: 5vh; width: 5vh; */
     padding: 1vh 1vw;
     border-radius: 5vh;
     border: none;
     position: absolute;
-    right: 5%; top: 5%;
-    transition: 1s linear ease; 
+    right: 5%;
+    top: 5%;
+    transition: 1s linear ease;
   }
+
   .close-dialog-button:hover {
     background-color: red;
     color: white;
   }
+
   h2 {
     margin-top: 0;
     color: var(--color1);
   }
+
   .form-group {
     margin-bottom: 15px;
   }
+
   label {
     display: block;
     margin-bottom: 5px;
   }
-  input, select {
+
+  input,
+  select {
     width: 70%;
     padding: 8px;
     border: 1px solid #d1d5db;
     border-radius: 2vh;
   }
+
   button[type="submit"] {
     background: var(--color1);
     color: white;
@@ -78,41 +95,56 @@
     cursor: pointer;
     transition: background 0.3s;
   }
+
   button[type="submit"]:hover {
     background: var(--gradient1);
   }
+
   table {
     width: 100%;
     border-collapse: collapse;
   }
-  th, td {
+
+  th,
+  td {
     /* border: 1px solid var(--color1); */
     border: none;
     padding: 10px;
     text-align: left;
   }
+
   thead>tr {
     background: var(--gradient1);
     color: white;
-    th, td { border: none;}
+
+    th,
+    td {
+      border: none;
+    }
   }
+
   th:nth-last-child(1) {
     border-radius: 0 1vw 0 0;
   }
+
   th:nth-child(1) {
     border-radius: 1vw 0 0 0;
   }
+
   tr:nth-last-child(1) {
     td:nth-child(1) {
-        border-radius: 0 0 0 1vw ;
+      border-radius: 0 0 0 1vw;
     }
+
     td:nth-last-child(1) {
-        border-radius: 0 0 1vw 0;
+      border-radius: 0 0 1vw 0;
     }
   }
+
   .patient-list button {
     margin-right: 5px;
   }
+
   @media (max-width: 768px) {
     main {
       flex-direction: column;
@@ -121,7 +153,8 @@
 
   .add-patient-button {
     border-radius: 100%;
-    width: 10vh; height: 10vh;
+    width: 10vh;
+    height: 10vh;
     background: var(--color1);
     border: none;
     font-size: 2.5vw;
