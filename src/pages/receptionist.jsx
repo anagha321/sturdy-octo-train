@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import "../styles/master.css";
 import "../styles/receptionist.css";
 import { ReactDialogBox } from 'react-js-dialog-box';
 import 'react-js-dialog-box/dist/index.css';
 import db from "../firebase_config.jsx";
-import { collection, doc, setDoc, getDocs, getCountFromServer } from 'firebase/firestore';
+import { collection, doc, setDoc, getDocs, getCountFromServer, deleteDoc } from 'firebase/firestore';
 
 const ReceptionistPage = () => {
-  // const fireSQL = new FireSQL(db);
   var docRef = collection(db, "patients");
 
   const [patients, setPatients] = useState([]);
@@ -24,26 +23,34 @@ const ReceptionistPage = () => {
           id: doc.id,
           name: doc.data().patient_name,
           age: Math.floor(Math.abs(doc.data().patient_dob.seconds * 1000 - Date.now()) / (1000 * 3600 * 24 * 365.25)).toString(),
-          gender: doc.data().patient_sex,
-          contact: '0000'
+          gender: doc.data().patient_sex.charAt(0).toUpperCase(),
+          contact: doc.data().patient_contact || ''
         }];
       });
       setPatients(patients);
     } catch (e) {
-      console.log("Firestore error");
+      console.error("Firestore error:", e);
     }
   }
 
+  useEffect(() => {
+    getPatientsFromDb();
+  }, []);
+
   const modifyPatientInDb = async () => {
-    var docid = currentPatient.id;
-    if (!isEditing) {
-      docid = (await getCountFromServer(docRef)).data().count + 1;
+    let docid;
+    if (isEditing) {
+      docid = currentPatient.id;
+    } else {
+      const snapshot = await getCountFromServer(docRef);
+      docid = (snapshot.data().count + 1).toString();
     }
-    await setDoc(doc(db, "patients", "" + docid), {
+    await setDoc(doc(db, "patients", docid), {
       patient_date_registration: Date.now(),
       patient_name: currentPatient.name,
-      patient_dob: 'January 1, 2005 at 12:00:00 AM UTC+5:30',
-      patient_sex: currentPatient.gender[0].toLowerCase()
+      patient_dob: 'January 1, 2005 at 12:00:00 AM UTC+5:30',
+      patient_sex: currentPatient.gender.charAt(0).toLowerCase(),
+      patient_contact: currentPatient.contact
     });
   }
 
@@ -62,28 +69,41 @@ const ReceptionistPage = () => {
   };
 
   const handleEdit = (patient) => {
-    setCurrentPatient(patient);
+    setCurrentPatient({
+      ...patient,
+      gender: patient.gender === 'M' ? 'Male' : patient.gender === 'F' ? 'Female' : 'Other'
+    });
     setDialogBox(true);
     setIsEditing(true);
   };
 
   const handleDialogBox = () => {
+    if (!isDialogBox) {
+      setCurrentPatient({ id: 0, name: '', age: '', gender: '', contact: '' });
+      setIsEditing(false);
+    }
     setDialogBox(!isDialogBox);
-    getPatientsFromDb();
   };
 
-  const handleDelete = (id) => {
-    setPatients(patients.filter(p => p.id !== id));
+  const handleDelete = async (id) => {
+    try {
+      await deleteDoc(doc(db, "patients", id));
+      setPatients(patients.filter(p => p.id !== id));
+    } catch (e) {
+      console.error("Error deleting document: ", e);
+    }
   };
-
-  getPatientsFromDb();
 
   return (
     <div className="receptionist-page">
       <header className="receptionist-header">
         <h1>ABC Hospital — Receptionist Dashboard</h1>
       </header>
-      <button className="add-patient-button" onClick={handleDialogBox}>
+      <button className="add-patient-button" onClick={() => {
+        setCurrentPatient({ id: 0, name: '', age: '', gender: '', contact: '' });
+        setIsEditing(false);
+        setDialogBox(true);
+      }}>
         +
       </button>
       <main>
@@ -94,7 +114,7 @@ const ReceptionistPage = () => {
             headerHeight='0'
             bodyBackgroundColor=''
             bodyTextColor='black'
-            bodyHeight='65vh'
+            bodyHeight='82vh'
             headerText=''>
             <section className="patient-form">
               <h2>{isEditing ? 'Edit Patient' : 'Add New Patient'}</h2>
@@ -132,9 +152,9 @@ const ReceptionistPage = () => {
                     required
                   >
                     <option value="">Select Gender</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Other">Other</option>
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
+                    <option value="O">Other</option>
                   </select>
                 </div>
                 <div className="form-group">
