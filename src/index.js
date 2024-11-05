@@ -5,6 +5,8 @@ import './index.css';
 import App from './App';
 import ReceptionistPage from "./pages/receptionist";
 import PharmacyPage from "./pages/pharmacy"; // Import the PharmacyPage component
+import ReceptionistLoginPage from "./pages/receptionist_login";
+import DoctorLoginPage from "./pages/doctor_login";
 import reportWebVitals from './reportWebVitals';
 import DoctorDashboard from './pages/doctor';
 
@@ -17,6 +19,8 @@ root.render(
         <Route path="/reception" element={<ReceptionistPage />} />
         <Route path="/doctor" element={<DoctorDashboard />} />
         <Route path="/pharmacy" element={<PharmacyPage />} /> {/* Add the route for PharmacyPage */}
+        <Route path="/reception_login" element={<ReceptionistLoginPage />} />
+        <Route path="/doctor_login" element={<DoctorLoginPage />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

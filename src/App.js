@@ -24,13 +24,12 @@ const Landing = () => {
           </svg>
           <h1 className='heading'>ABC Hospital Management System</h1>
         </div>
-        <button className="login-button" onClick={handleLogin}>
-          <Link to="/reception">Receptionist</Link>
-          {/* Log In */}
-        </button>
         <button className='login-button'>
-          <Link to='/doctor'>Doctor</Link>
+          <Link to='/doctor_login'>DoctorLogin</Link>
         </button>
+        {/*<button className='login-button'>
+          <Link to='/reception_login'>ReceptionistLogin</Link>
+        </button>*/}
         <button className='login-button'>
           <Link to='/pharmacy'>Pharmacy</Link>
         </button>
